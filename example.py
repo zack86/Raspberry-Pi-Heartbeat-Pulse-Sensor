@@ -13,13 +13,15 @@ with open('pulse.csv', 'w') as csvfile:
 
     try:
         while True:
-            bpm = p.BPM
+            bpm = p.BPM		
+	    dt = str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
             if bpm > 0:
-                print("BPM: %d" % bpm)
+                print(dt + "  BPM: %d" % bpm)
             else:
-                print("No Heartbeat found")
-            writer.writerow({'datetime': datetime.datetime.now(),
-                             'BPM':bpm})
+                print(dt + "  No Heartbeat found")
+	    
+	    writer.writerow({'datetime': dt, 'BPM':bpm})
             time.sleep(1)
     except:
         p.stopAsyncBPM()
